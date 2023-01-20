@@ -2,8 +2,20 @@
 using namespace std;
 
 
+bool inputValid(int * val){
+    
+    bool valid = true;
+
+    for(int i = 0; i < 4; i++){
+        if (val[i] == -1){
+            valid = false;
+        }
+    }
+    return valid;
+}
 
 int valueOfCard(string card){
+
 // Menghasilkan nilai dari kartu yang dimasukan
 // Kalau kartu tidak valid nilai akan menjadi -1
 
@@ -53,4 +65,34 @@ int valueOfCard(string card){
     }
 
     return val;
+}
+
+int * input(){
+
+    string card[4];
+    static int cardValue[4];
+    char opt;
+
+    cout << "Apakah input ingin random? (y/n)";
+    cin >> opt;
+
+    if( opt == 'n'){
+        for (int i = 0; i < 4; i++){
+            cin >> card[i];
+            //cout << card[i] << "\n";
+            cardValue[i] = valueOfCard(card[i]);
+    }
+    }
+    else{
+        srand(time(0)); // set up random seed
+        for (int i = 0; i < 4 ;i++){
+            cardValue[i] = rand() % 13 + 1; // random number generator
+        }
+    }
+
+    for (int i = 0; i < 4 ;i++){
+        cout << cardValue[i] << "\n";
+    } 
+
+    return cardValue;
 }
