@@ -4,7 +4,8 @@
 using namespace std;
 
 int main (){
-    int *cardValue;
+    double *cardValue;
+    const int result = 24;
 
     cardValue = input();
     
