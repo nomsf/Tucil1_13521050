@@ -4,8 +4,10 @@
 using namespace std;
 
 int main (){
-    double *cardValue;
+    double * cardValue;
+    double * permValue;
     const int result = 24;
+    int resultCount;
 
     cardValue = input();
     
@@ -14,7 +16,9 @@ int main (){
         cardValue = input();
     }
 
-    
+    resultCount = solve(cardValue, result);
+
+    cout << "result count: " << resultCount;
 
     return 0;
 }

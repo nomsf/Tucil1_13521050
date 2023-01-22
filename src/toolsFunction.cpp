@@ -92,25 +92,18 @@ double * input(){
     }
 
     for (int i = 0; i < 4 ;i++){
-        cout << cardValue[i] << "\n";
+        cout << cardValue[i] << " ";
     } 
+    cout << "\n";
 
     return cardValue;
 }
-
-/*  
-    Number of ways to rearrange 1, 3, 4 and 6 within the expression.
-    Number of operator combinations.
-    Number of forms of the expression. 
-*/
-
-
 
 double * permutation(double * cardValue, int i){
 // Menghasilkan hasil permutasi sesuai urutan yang dimasukan (1-24) karena ada 
 // 24 kemungkinan susunan angka.
 
-    double permValue[4];
+    static double permValue[4];
 
     switch (i)
     {
@@ -118,79 +111,148 @@ double * permutation(double * cardValue, int i){
         permValue[0] = cardValue[0]; permValue[1] = cardValue[1]; permValue[2] = cardValue[2]; permValue[3] = cardValue[3];
         break;
     case 1:
-        permValue[0] = cardValue[0]; permValue[1] = cardValue[1]; permValue[3] = cardValue[3]; permValue[2] = cardValue[2];
+        permValue[0] = cardValue[0]; permValue[1] = cardValue[1]; permValue[2] = cardValue[3]; permValue[3] = cardValue[2];
         break;
     case 2:
-        permValue[0] = cardValue[0]; permValue[2] = cardValue[2]; permValue[1] = cardValue[1]; permValue[3] = cardValue[3];
+        permValue[0] = cardValue[0]; permValue[1] = cardValue[2]; permValue[2] = cardValue[1]; permValue[3] = cardValue[3];
         break;
     case 3:
-        permValue[0] = cardValue[0]; permValue[2] = cardValue[2]; permValue[3] = cardValue[3]; permValue[1] = cardValue[1];
+        permValue[0] = cardValue[0]; permValue[1] = cardValue[2]; permValue[2] = cardValue[3]; permValue[3] = cardValue[1];
         break;
     case 4:
-        permValue[0] = cardValue[0]; permValue[3] = cardValue[3]; permValue[1] = cardValue[1]; permValue[2] = cardValue[2];
+        permValue[0] = cardValue[0]; permValue[1] = cardValue[3]; permValue[2] = cardValue[1]; permValue[3] = cardValue[2];
         break;
     case 5:
-        permValue[0] = cardValue[0]; permValue[3] = cardValue[3]; permValue[2] = cardValue[2]; permValue[1] = cardValue[1];
+        permValue[0] = cardValue[0]; permValue[1] = cardValue[3]; permValue[2] = cardValue[2]; permValue[3] = cardValue[1];
         break;
     case 6:
-        permValue[1] = cardValue[1]; permValue[0] = cardValue[0]; permValue[2] = cardValue[2]; permValue[3] = cardValue[3];
+        permValue[0] = cardValue[1]; permValue[1] = cardValue[0]; permValue[2] = cardValue[2]; permValue[3] = cardValue[3];
         break;
     case 7:
-        permValue[1] = cardValue[1]; permValue[0] = cardValue[0]; permValue[3] = cardValue[3]; permValue[2] = cardValue[2];
+        permValue[0] = cardValue[1]; permValue[1] = cardValue[0]; permValue[2] = cardValue[3]; permValue[3] = cardValue[2];
         break;
     case 8:
-        permValue[1] = cardValue[1]; permValue[2] = cardValue[2]; permValue[0] = cardValue[0]; permValue[3] = cardValue[3];
+        permValue[0] = cardValue[1]; permValue[1] = cardValue[2]; permValue[2] = cardValue[0]; permValue[3] = cardValue[3];
         break;
     case 9:
-        permValue[1] = cardValue[1]; permValue[2] = cardValue[2]; permValue[3] = cardValue[3]; permValue[0] = cardValue[0];
+        permValue[0] = cardValue[1]; permValue[1] = cardValue[2]; permValue[2] = cardValue[3]; permValue[3] = cardValue[0];
         break;
     case 10:
-        permValue[1] = cardValue[1]; permValue[3] = cardValue[3]; permValue[0] = cardValue[0]; permValue[2] = cardValue[2];
+        permValue[0] = cardValue[1]; permValue[1] = cardValue[3]; permValue[2] = cardValue[0]; permValue[3] = cardValue[2];
         break;
     case 11:
-        permValue[1] = cardValue[1]; permValue[3] = cardValue[3]; permValue[2] = cardValue[2]; permValue[0] = cardValue[0];
+        permValue[0] = cardValue[1]; permValue[1] = cardValue[3]; permValue[2] = cardValue[2]; permValue[3] = cardValue[0];
         break;
     case 12:
-        permValue[2] = cardValue[2]; permValue[0] = cardValue[0]; permValue[1] = cardValue[1]; permValue[3] = cardValue[3];
+        permValue[0] = cardValue[2]; permValue[1] = cardValue[0]; permValue[2] = cardValue[1]; permValue[3] = cardValue[3];
         break;
     case 13:
-        permValue[2] = cardValue[2]; permValue[0] = cardValue[0]; permValue[3] = cardValue[3]; permValue[1] = cardValue[1];
+        permValue[0] = cardValue[2]; permValue[1] = cardValue[0]; permValue[2] = cardValue[3]; permValue[3] = cardValue[1];
         break;
     case 14:
-        permValue[2] = cardValue[2]; permValue[1] = cardValue[1]; permValue[0] = cardValue[0]; permValue[3] = cardValue[3];
+        permValue[0] = cardValue[2]; permValue[1] = cardValue[1]; permValue[2] = cardValue[0]; permValue[3] = cardValue[3];
         break;
     case 15:
-        permValue[2] = cardValue[2]; permValue[1] = cardValue[1]; permValue[3] = cardValue[3]; permValue[0] = cardValue[0];
+        permValue[0] = cardValue[2]; permValue[1] = cardValue[1]; permValue[2] = cardValue[3]; permValue[3] = cardValue[0];
         break;
     case 16:
-        permValue[2] = cardValue[2]; permValue[3] = cardValue[3]; permValue[0] = cardValue[0]; permValue[1] = cardValue[1];
+        permValue[0] = cardValue[2]; permValue[1] = cardValue[3]; permValue[2] = cardValue[0]; permValue[3] = cardValue[1];
         break;
     case 17:
-        permValue[2] = cardValue[2]; permValue[3] = cardValue[3]; permValue[1] = cardValue[1]; permValue[0] = cardValue[0];
+        permValue[0] = cardValue[2]; permValue[1] = cardValue[3]; permValue[2] = cardValue[1]; permValue[3] = cardValue[0];
         break;
     case 18:
-        permValue[3] = cardValue[3]; permValue[0] = cardValue[0]; permValue[1] = cardValue[1]; permValue[2] = cardValue[2];
+        permValue[0] = cardValue[3]; permValue[1] = cardValue[0]; permValue[2] = cardValue[1]; permValue[3] = cardValue[2];
         break;
     case 19:
-        permValue[3] = cardValue[3]; permValue[0] = cardValue[0]; permValue[2] = cardValue[2]; permValue[1] = cardValue[1];
+        permValue[0] = cardValue[3]; permValue[1] = cardValue[0]; permValue[2] = cardValue[2]; permValue[3] = cardValue[1];
         break;
     case 20:
-        permValue[3] = cardValue[3]; permValue[1] = cardValue[1]; permValue[0] = cardValue[0]; permValue[2] = cardValue[2];
+        permValue[0] = cardValue[3]; permValue[1] = cardValue[1]; permValue[2] = cardValue[0]; permValue[3] = cardValue[2];
         break;
     case 21:
-        permValue[3] = cardValue[3]; permValue[1] = cardValue[1]; permValue[2] = cardValue[2]; permValue[0] = cardValue[0];
+        permValue[0] = cardValue[3]; permValue[1] = cardValue[1]; permValue[2] = cardValue[2]; permValue[3] = cardValue[0];
         break;
     case 22:
-        permValue[3] = cardValue[3]; permValue[2] = cardValue[2]; permValue[0] = cardValue[0]; permValue[1] = cardValue[1];
+        permValue[0] = cardValue[3]; permValue[1] = cardValue[2]; permValue[2] = cardValue[0]; permValue[3] = cardValue[1];
         break;
     case 23:
-        permValue[3] = cardValue[3]; permValue[2] = cardValue[2]; permValue[1] = cardValue[1]; permValue[0] = cardValue[0];
+        permValue[0] = cardValue[3]; permValue[1] = cardValue[2]; permValue[2] = cardValue[1]; permValue[3] = cardValue[0];
         break;
     
     default:
+        permValue[0] = cardValue[0]; permValue[1] = cardValue[1]; permValue[2] = cardValue[2]; permValue[3] = cardValue[3];
         break;
     }
 
     return permValue;
 }
 
+double ex(double a,char oper, double b){
+
+    double res;
+
+    switch (oper)
+    {
+    case '+':
+        res = a + b;
+        break;
+    case '-':
+        res = a - b;
+        break;
+    case '/':
+        res = a / b;
+        break;
+    case '*':
+        res = a * b;
+        break;
+    
+    default:
+        break;
+    }
+
+    return res;
+}
+
+
+int solve(double * cardValue, double goal){
+    
+    char opr[4] = {'+', '-', '*', '/'};
+    double * permValue;
+    int count = 0;
+
+    for (char x : opr){
+        for (char y : opr){
+            for (char z : opr){
+                for (int i = 0; i < 24 ; i++){
+
+                    permValue = permutation(cardValue, i);
+
+                    if(ex(ex(ex(permValue[0], x, permValue[1]), y, permValue[2]),z,permValue[3]) == goal){ // ((a * b) * c) * d
+                        cout << "((" << permValue[0] << x << permValue[1] << ')' << y << permValue[2] << ')' << z << permValue[3] << "\n";
+                        count++;
+                    }
+                    if(ex(ex(permValue[0],x,ex(permValue[1],y,permValue[2])),z,permValue[3]) == goal){ // (a * (b * c)) * d                        
+                        cout << '(' << permValue[0] << x << '(' << permValue[1] << y << permValue[2] << "))" << z << permValue[3] << "\n";
+                        count++;
+                    }
+                    if(ex(ex(permValue[0],x,permValue[1]), y ,ex(permValue[2],z,permValue[3])) == goal){// (a * b) * (c * d)
+                        cout << '(' << permValue[0] << x << permValue[1] << ')' << y << '(' << permValue[2] << z << permValue[3] << ')' << "\n";
+                        count++;
+                    }
+                    if(ex(permValue[0], x, ex(ex(permValue[1], y, permValue[2]),z ,permValue[3])) == goal){ // a * ((b * c) * d)
+                        cout << permValue[0] << x << "((" << permValue[1] << y << permValue[2] << ')' << z << permValue[3] << ')' << "\n";
+                        count++;
+                    }
+                    if(ex(permValue[0], x, ex(permValue[1], y, ex(permValue[2],z ,permValue[3]))) == goal){ // a * (b * (c * d))
+                        cout << permValue[0] << x << '(' << permValue[1] << y << '(' << permValue[2] << z << permValue[3] << "))" << "\n";
+                        count++;
+                    }
+
+                }
+            }
+        }
+    }
+
+    return count;
+}

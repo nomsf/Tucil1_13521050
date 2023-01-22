@@ -38,3 +38,6 @@
     (a * b) * (c * d)
     a * ((b * c) * d)
     a * (b * (c * d))
+
+
+hasil kalkulasi yang mirip tetap ditampilkan
