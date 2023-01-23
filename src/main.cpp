@@ -15,12 +15,28 @@ int main (){
     double resultTime;
     string resultArray[7680];
 
+    printHomeScreen();
+
     cardValue = input();
     
     while (!inputValid(cardValue)){
-        cout << "Masukan Salah!\n";
+        cout << " _______________________________________________________________________ \n";
+        cout << "|                          Invalid Input!                               | \n";
+        cout << "| Input four of the following = A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K  |\n";
+        cout << "|_______________________________________________________________________|\n";
         cardValue = input();
     }
+
+    cout << " _______________________________________________________________________ \n";
+    cout << "|                        Your Cards Value:                              | \n";
+    cout << "|                            ";
+    for (int i = 0; i < 4 ;i++){
+        
+        cout << cardValue[i] << " ";
+    }
+    cout << "                                   | \n";
+    cout << "|_______________________________________________________________________|\n";
+    cout << "\n";
 
     auto timeBefore = high_resolution_clock::now();
     solve(cardValue, goal, &resultCount, resultArray);
@@ -29,10 +45,10 @@ int main (){
 
     resultTime = timeTotal.count();
 
-    cout << "result count: " << resultCount << "\n";
+    cout << "RESULT COUNT: " << resultCount << "\n";
     if (resultCount != 0){
 
-        cout << "Function Time: " << resultTime << " microseconds \n";
+        cout << "PROCESS DURATION: " << resultTime << " microseconds \n";
         //cout << resultExpression;
 
 
@@ -43,19 +59,25 @@ int main (){
             }
             cout << resultArray[i] << "       ";
         }
-
-        cout << "\n" << "Do you want to store the result? (y/n) \n";
+        cout << "\n \n";
+        cout << " _______________________________________________________________________ \n";
+        cout << "|                Do you want to store the result? (y/n)                 |\n";
+        cout << "|_______________________________________________________________________|\n";
         char opt;
         cin >> opt;
         if (opt == 'y'){
             storeInFile(resultArray, resultCount, resultTime, cardValue);
         }
         else {
-            cout << "Result not saved.";
+            cout << " _______________________________________________________________________ \n";
+            cout << "|                Result not saved. Thankyou and goodbye!                |\n";
+            cout << "|_______________________________________________________________________|\n";
         }
     }
     else{
-        cout << "There is no solution for this set of cards.";
+        cout << " _______________________________________________________________________ \n";
+        cout << "|              There is no solution for this set of cards.              |\n";
+        cout << "|_______________________________________________________________________|\n";
     }
     
 

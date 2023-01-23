@@ -1,0 +1,5 @@
+Card Values : 3 2 5 12
+1 solution found within 0 microseconds
+
+Result Expression: 
+12 / (3 - (5 / 2))       

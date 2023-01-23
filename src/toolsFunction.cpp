@@ -3,6 +3,24 @@
 #include <fstream>
 using namespace std;
 
+void printHomeScreen(){
+    cout << " _______________________________________________________________________ \n";
+    cout << "|                                                                       |\n";
+    cout << "|                           24 CARD GAME SOLVER                         |\n";
+    cout << "|                                                                       |\n";
+    cout << "|               Input 4 card in a certain order and the                 |\n";
+    cout << "|               program will determine all expression                   |\n";
+    cout << "|               that result in 24 total value.                          |\n";
+    cout << "|                                                                       |\n";
+    cout << "|                        Input Example: A 10 2 K                        |\n";
+    cout << "|                                                                       |\n";
+    cout << "|     accepted card input = A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K      |\n";
+    cout << "|                                                                       |\n";
+    cout << "|                                          Created By: Naufal Syifa F.  |\n";
+    cout << "|_______________________________________________________________________|\n";
+    
+}
+
 
 bool inputValid(double * val){
     
@@ -75,10 +93,13 @@ double * input(){
     static double cardValue[4];
     char opt;
 
-    cout << "Apakah input ingin random? (y/n)";
+    cout << " _______________________________________________________________________ \n";
+    cout << "|               Do you want to randomize the input? (y/n)               | \n";
+    cout << "|_______________________________________________________________________|\n";
     cin >> opt;
 
     if( opt == 'n'){
+        cout << "Card Input: ";
         for (int i = 0; i < 4; i++){
             cin >> card[i];
             //cout << card[i] << "\n";
@@ -92,10 +113,6 @@ double * input(){
         }
     }
 
-    for (int i = 0; i < 4 ;i++){
-        cout << cardValue[i] << " ";
-    } 
-    cout << "\n";
 
     return cardValue;
 }
@@ -215,7 +232,6 @@ double ex(double a,char oper, double b){
     return res;
 }
 
-
 string convertCharToString(char * a, int n){
     
     string res = "";
@@ -292,7 +308,6 @@ void solve(double * cardValue, double goal, int * count, string * resultArray){
     }
 }
 
-
 string fileName(double * cardValue){
 
     string name = "Result_(";
@@ -323,16 +338,14 @@ string fileName(double * cardValue){
     }
     
     name = name + ")";
-    name = "../test/" + name;
+    name = "../test/" + name + ".txt";
 
     return name;
 }
 
-
 void storeInFile(string * resultArray, int resultCount, double resultTime, double * cardValue){
 
     string filename = fileName(cardValue);
-    cout << filename;
     ofstream resultFile (filename);
 
     resultFile << "Card Values : " << cardValue[0] << " " << cardValue[1] << " " << cardValue[2] << " " << cardValue[3] << "\n";
@@ -348,5 +361,8 @@ void storeInFile(string * resultArray, int resultCount, double resultTime, doubl
     }
 
     resultFile.close();
+    cout << " _______________________________________________________________________ \n";
+    cout << "|                  Result saved. Thankyou and goodbye!                  |\n";
+    cout << "|_______________________________________________________________________|\n";
 
 }

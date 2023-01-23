@@ -1,0 +1,7 @@
+Card Values : 4 7 4 13
+8 solution found within 0 microseconds
+
+Result Expression: 
+(4 * 13) - (7 * 4)       (4 * 13) - (4 * 7)       (4 * 13) - (4 * 7)       
+(4 * 13) - (7 * 4)       (13 * 4) - (7 * 4)       (13 * 4) - (4 * 7)       
+(13 * 4) - (4 * 7)       (13 * 4) - (7 * 4)       
