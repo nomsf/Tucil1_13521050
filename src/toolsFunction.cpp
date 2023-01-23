@@ -1,5 +1,6 @@
 #include <iostream>
 #include <time.h>
+#include <fstream>
 using namespace std;
 
 
@@ -215,11 +216,27 @@ double ex(double a,char oper, double b){
 }
 
 
-int solve(double * cardValue, double goal){
+string convertCharToString(char * a, int n){
+    
+    string res = "";
+
+    for(int i = 0; i < n; i++ ){
+        if (a[i] != ' '){
+            res += a[i];
+         }
+    }
+        
+
+    return res;
+}
+
+void solve(double * cardValue, double goal, int * count, string * resultArray){
     
     char opr[4] = {'+', '-', '*', '/'};
     double * permValue;
-    int count = 0;
+    char buffer[30];
+    int n;
+
 
     for (char x : opr){
         for (char y : opr){
@@ -229,30 +246,107 @@ int solve(double * cardValue, double goal){
                     permValue = permutation(cardValue, i);
 
                     if(ex(ex(ex(permValue[0], x, permValue[1]), y, permValue[2]),z,permValue[3]) == goal){ // ((a * b) * c) * d
-                        cout << "((" << permValue[0] << x << permValue[1] << ')' << y << permValue[2] << ')' << z << permValue[3] << "\n";
-                        count++;
+                        //cout << " cek: " << "((" << permValue[0] << x << permValue[1] << ')' << y << permValue[2] << ')' << z << permValue[3] << "\n";
+                        *count = *count + 1;
+                        n = sprintf(buffer, "((%.0lf %c %.0lf) %c %.0lf) %c %.0lf", permValue[0], x, permValue[1], y, permValue[2], z, permValue[3]);
+                        //cout << buffer << "\n";
+                        resultArray[*count - 1] = buffer;
+                        //*resultExpression = *resultExpression + convertCharToString(buffer, n) + " | ";
                     }
                     if(ex(ex(permValue[0],x,ex(permValue[1],y,permValue[2])),z,permValue[3]) == goal){ // (a * (b * c)) * d                        
-                        cout << '(' << permValue[0] << x << '(' << permValue[1] << y << permValue[2] << "))" << z << permValue[3] << "\n";
-                        count++;
+                        //cout << " cek: " << '(' << permValue[0] << x << '(' << permValue[1] << y << permValue[2] << "))" << z << permValue[3] << "\n";
+                        *count = *count + 1;
+                        n = sprintf(buffer, "(%.0lf %c (%.0lf %c %.0lf)) %c %.0lf", permValue[0], x, permValue[1], y, permValue[2], z, permValue[3]);
+                        //cout << buffer << "\n";
+                        resultArray[*count - 1] = buffer;
+                        //*resultExpression = *resultExpression + convertCharToString(buffer, n) + " | ";
                     }
                     if(ex(ex(permValue[0],x,permValue[1]), y ,ex(permValue[2],z,permValue[3])) == goal){// (a * b) * (c * d)
-                        cout << '(' << permValue[0] << x << permValue[1] << ')' << y << '(' << permValue[2] << z << permValue[3] << ')' << "\n";
-                        count++;
+                        //cout << " cek: " << '(' << permValue[0] << x << permValue[1] << ')' << y << '(' << permValue[2] << z << permValue[3] << ')' << "\n";
+                        *count = *count + 1;
+                        n = sprintf(buffer, "(%.0lf %c %.0lf) %c (%.0lf %c %.0lf)", permValue[0], x, permValue[1], y, permValue[2], z, permValue[3]);
+                        //cout << buffer << "\n";
+                        resultArray[*count - 1] = buffer;
+                        //*resultExpression = *resultExpression + convertCharToString(buffer, n) + " | ";
                     }
                     if(ex(permValue[0], x, ex(ex(permValue[1], y, permValue[2]),z ,permValue[3])) == goal){ // a * ((b * c) * d)
-                        cout << permValue[0] << x << "((" << permValue[1] << y << permValue[2] << ')' << z << permValue[3] << ')' << "\n";
-                        count++;
+                        //cout << " cek: " << permValue[0] << x << "((" << permValue[1] << y << permValue[2] << ')' << z << permValue[3] << ')' << "\n";
+                        *count = *count + 1;
+                        n = sprintf(buffer, "%.0lf %c ((%.0lf %c %.0lf) %c %.0lf)", permValue[0], x, permValue[1], y, permValue[2], z, permValue[3]);
+                        //cout << buffer << "\n";
+                        resultArray[*count - 1] = buffer;
+                        //*resultExpression = *resultExpression + convertCharToString(buffer, n) + " | ";
                     }
                     if(ex(permValue[0], x, ex(permValue[1], y, ex(permValue[2],z ,permValue[3]))) == goal){ // a * (b * (c * d))
-                        cout << permValue[0] << x << '(' << permValue[1] << y << '(' << permValue[2] << z << permValue[3] << "))" << "\n";
-                        count++;
+                        //cout << " cek: " << permValue[0] << x << '(' << permValue[1] << y << '(' << permValue[2] << z << permValue[3] << "))" << "\n";
+                        *count = *count + 1;
+                        n = sprintf(buffer, "%.0lf %c (%.0lf %c (%.0lf %c %.0lf))", permValue[0], x, permValue[1], y, permValue[2], z, permValue[3]);
+                        //cout << buffer << "\n";
+                        resultArray[*count - 1] = buffer;
+                        //*resultExpression = *resultExpression + convertCharToString(buffer, n) + " | ";
                     }
 
                 }
             }
         }
     }
+}
 
-    return count;
+
+string fileName(double * cardValue){
+
+    string name = "Result_(";
+    char card[1];
+
+    for (int i = 0; i < 4; i++){
+
+        if( i != 0 ){
+            name += ",";
+        }
+        
+        if(cardValue[i] == 1){
+            name += "A";
+        }
+        else if(cardValue[i] == 11){
+            name += "J";
+        }
+        else if(cardValue[i] == 12){
+            name += "Q";
+        }
+        else if(cardValue[i] == 13){
+            name += "K";
+        }
+        else{
+            sprintf(card, "%.0lf", cardValue[i]);
+            name += card;
+        }
+    }
+    
+    name = name + ")";
+    name = "../test/" + name;
+
+    return name;
+}
+
+
+void storeInFile(string * resultArray, int resultCount, double resultTime, double * cardValue){
+
+    string filename = fileName(cardValue);
+    cout << filename;
+    ofstream resultFile (filename);
+
+    resultFile << "Card Values : " << cardValue[0] << " " << cardValue[1] << " " << cardValue[2] << " " << cardValue[3] << "\n";
+
+    resultFile << resultCount << " solution found within " << resultTime << " microseconds" << "\n" << "\n";
+
+    resultFile << "Result Expression: ";
+    for(int i = 0; i < resultCount; i++){
+        if (i % 3 ==0){
+            resultFile << "\n";
+        }
+        resultFile << resultArray[i] << "       ";
+    }
+
+    resultFile.close();
+
 }
