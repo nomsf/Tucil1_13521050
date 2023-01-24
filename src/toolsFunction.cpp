@@ -4,6 +4,8 @@
 using namespace std;
 
 void printHomeScreen(){
+// Menampilkan informasi dan pesan selamat datang pada pengguna
+
     cout << " _______________________________________________________________________ \n";
     cout << "|                                                                       |\n";
     cout << "|                           24 CARD GAME SOLVER                         |\n";
@@ -23,6 +25,7 @@ void printHomeScreen(){
 
 
 bool inputValid(double * val){
+// Menghasilkan true jika masukan adalah valid
     
     bool valid = true;
 
@@ -35,7 +38,6 @@ bool inputValid(double * val){
 }
 
 double valueOfCard(string card){
-
 // Menghasilkan nilai dari kartu yang dimasukan
 // Kalau kartu tidak valid nilai akan menjadi -1
 
@@ -88,6 +90,8 @@ double valueOfCard(string card){
 }
 
 double * input(){
+// Menerima masukan kartu dari pengguna atau memasukan 4 kartu random
+// Lalu fungsi menghasilkan array of double yang berisi 4 nilai kartu
 
     string card[4];
     static double cardValue[4];
@@ -118,7 +122,7 @@ double * input(){
 }
 
 double * permutation(double * cardValue, int i){
-// Menghasilkan hasil permutasi sesuai urutan yang dimasukan (1-24) karena ada 
+// Menghasilkan hasil permutasi urutan kartu sesuai urutan yang dimasukan (1-24) karena ada 
 // 24 kemungkinan susunan angka.
 
     static double permValue[4];
@@ -207,6 +211,8 @@ double * permutation(double * cardValue, int i){
 }
 
 double ex(double a,char oper, double b){
+// Menghasilkan sebuah double hasil dari perhitungan nilai a dan b
+// sesuai dengan operasi yang dimasukan
 
     double res;
 
@@ -233,6 +239,7 @@ double ex(double a,char oper, double b){
 }
 
 string convertCharToString(char * a, int n){
+// Menghasilkan string dari array of char
     
     string res = "";
 
@@ -247,6 +254,7 @@ string convertCharToString(char * a, int n){
 }
 
 void solve(double * cardValue, double goal, int * count, string * resultArray){
+// algoritma utama  brute force
     
     char opr[4] = {'+', '-', '*', '/'};
     double * permValue;
@@ -262,44 +270,29 @@ void solve(double * cardValue, double goal, int * count, string * resultArray){
                     permValue = permutation(cardValue, i);
 
                     if(ex(ex(ex(permValue[0], x, permValue[1]), y, permValue[2]),z,permValue[3]) == goal){ // ((a * b) * c) * d
-                        //cout << " cek: " << "((" << permValue[0] << x << permValue[1] << ')' << y << permValue[2] << ')' << z << permValue[3] << "\n";
                         *count = *count + 1;
                         n = sprintf(buffer, "((%.0lf %c %.0lf) %c %.0lf) %c %.0lf", permValue[0], x, permValue[1], y, permValue[2], z, permValue[3]);
-                        //cout << buffer << "\n";
                         resultArray[*count - 1] = buffer;
-                        //*resultExpression = *resultExpression + convertCharToString(buffer, n) + " | ";
                     }
-                    if(ex(ex(permValue[0],x,ex(permValue[1],y,permValue[2])),z,permValue[3]) == goal){ // (a * (b * c)) * d                        
-                        //cout << " cek: " << '(' << permValue[0] << x << '(' << permValue[1] << y << permValue[2] << "))" << z << permValue[3] << "\n";
+                    if(ex(ex(permValue[0],x,ex(permValue[1],y,permValue[2])),z,permValue[3]) == goal){ // (a * (b * c)) * d                       
                         *count = *count + 1;
                         n = sprintf(buffer, "(%.0lf %c (%.0lf %c %.0lf)) %c %.0lf", permValue[0], x, permValue[1], y, permValue[2], z, permValue[3]);
-                        //cout << buffer << "\n";
                         resultArray[*count - 1] = buffer;
-                        //*resultExpression = *resultExpression + convertCharToString(buffer, n) + " | ";
                     }
                     if(ex(ex(permValue[0],x,permValue[1]), y ,ex(permValue[2],z,permValue[3])) == goal){// (a * b) * (c * d)
-                        //cout << " cek: " << '(' << permValue[0] << x << permValue[1] << ')' << y << '(' << permValue[2] << z << permValue[3] << ')' << "\n";
                         *count = *count + 1;
                         n = sprintf(buffer, "(%.0lf %c %.0lf) %c (%.0lf %c %.0lf)", permValue[0], x, permValue[1], y, permValue[2], z, permValue[3]);
-                        //cout << buffer << "\n";
                         resultArray[*count - 1] = buffer;
-                        //*resultExpression = *resultExpression + convertCharToString(buffer, n) + " | ";
                     }
                     if(ex(permValue[0], x, ex(ex(permValue[1], y, permValue[2]),z ,permValue[3])) == goal){ // a * ((b * c) * d)
-                        //cout << " cek: " << permValue[0] << x << "((" << permValue[1] << y << permValue[2] << ')' << z << permValue[3] << ')' << "\n";
                         *count = *count + 1;
                         n = sprintf(buffer, "%.0lf %c ((%.0lf %c %.0lf) %c %.0lf)", permValue[0], x, permValue[1], y, permValue[2], z, permValue[3]);
-                        //cout << buffer << "\n";
                         resultArray[*count - 1] = buffer;
-                        //*resultExpression = *resultExpression + convertCharToString(buffer, n) + " | ";
                     }
                     if(ex(permValue[0], x, ex(permValue[1], y, ex(permValue[2],z ,permValue[3]))) == goal){ // a * (b * (c * d))
-                        //cout << " cek: " << permValue[0] << x << '(' << permValue[1] << y << '(' << permValue[2] << z << permValue[3] << "))" << "\n";
                         *count = *count + 1;
                         n = sprintf(buffer, "%.0lf %c (%.0lf %c (%.0lf %c %.0lf))", permValue[0], x, permValue[1], y, permValue[2], z, permValue[3]);
-                        //cout << buffer << "\n";
                         resultArray[*count - 1] = buffer;
-                        //*resultExpression = *resultExpression + convertCharToString(buffer, n) + " | ";
                     }
 
                 }
@@ -309,6 +302,7 @@ void solve(double * cardValue, double goal, int * count, string * resultArray){
 }
 
 string fileName(double * cardValue){
+// menghasilkan nama file sesuai format yang telah ditentukan
 
     string name = "Result_(";
     char card[1];
@@ -344,6 +338,7 @@ string fileName(double * cardValue){
 }
 
 void storeInFile(string * resultArray, int resultCount, double resultTime, double * cardValue){
+// menyimpan hasil brute force kedalam file .txt
 
     string filename = fileName(cardValue);
     ofstream resultFile (filename);

@@ -41,3 +41,13 @@
 
 
 hasil kalkulasi yang mirip tetap ditampilkan
+
+
+isi laporan:
+- pendahuluan
+    - permainan 24
+    - algoritma brute Force
+- Penerapan Algorima Brute Force
+- Program dalam C++
+- Eksperimen
+- Link repo
