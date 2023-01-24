@@ -12,6 +12,7 @@ Program ini bertujuan untuk menemukan semua ekspresi matematika dari keempat kar
 **Catatan**
 - 2 atau lebih ekspresi dengan bentuk yang mirip akan dianggap sebagai solusi yang berbeda.
 - Kartu A, J, Q, dan K secara berurut mempunyai nilai 1, 11, 12, dan 13.
+- Pengukuran durasi algoritma menggunakan library <chrono>
 
 ## Requirement
 Dalam pengembangannya, program dicompile oleh **GCC Version 6.3.0**.
