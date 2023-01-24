@@ -1,0 +1,6 @@
+Card Values : 13 8 8 4
+4 solution found within 0.000 microseconds
+
+Result Expression: 
+((13 * 8) - 8) / 4       ((13 * 8) - 8) / 4       ((8 * 13) - 8) / 4       
+((8 * 13) - 8) / 4       
